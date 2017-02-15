@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<config>
+    <group>
+        <!--app-->
+        <property name="simconf.app.name" description="项目名字" defaultValue="简易配置中心"/>
+        <property name="simconf.app.author" description="项目负责人" defaultValue="康永敢"/>
+        <property name="simconf.app.ba.no" description="备案号" defaultValue="皖ICP备16017743号-1"/>
+
+        <!-- redis -->
+        <property name="simconf.redis.maxTotal" description="redis最大连接数" defaultValue="1000"/>
+        <property name="simconf.redis.minIdle" description="redis最小等待数" defaultValue="50"/>
+        <property name="simconf.redis.maxIdle" description="redis最大等待数" defaultValue="100"/>
+        <property name="simconf.redis.testOnBorrow" description="redis测试支持" defaultValue="true"/>
+        <property name="simconf.redis.host" description="redis主机ip" defaultValue="127.0.0.1"/>
+        <property name="simconf.redis.port" description="redis主机端口" defaultValue="6379"/>
+        <property name="simconf.redis.password" description="redis密码" defaultValue="123456"/>
+        <property name="simconf.redis.prefix" description="redis的key的前缀" defaultValue="simconf"/>
+
+        <!--jdbc-->
+        <property name="simconf.jdbc.driver" description="jdbc驱动" defaultValue="com.mysql.jdbc.Driver"/>
+        <property name="simconf.jdbc.url" description="jdbc地址" defaultValue="jdbc:mysql://127.0.0.1:3306/simconf"/>
+        <property name="simconf.jdbc.username" description="jdbc用户名" defaultValue="root"/>
+        <property name="simconf.jdbc.password" description="jdbc密码" defaultValue="123456"/>
+
+        <!--mail-->
+        <property name="simconf.mail.host" description="邮件服务器地址" defaultValue="smtp.163.com"/>
+        <property name="simconf.mail.username" description="邮件服务器用户名" defaultValue="kangyg2017@163.com"/>
+        <property name="simconf.mail.password" description="邮件服务器密码" defaultValue="******"/>
+        <property name="simconf.mail.receiver" description="错误日志邮件接收人" defaultValue="kangyonggan@gmail.com"/>
+        <property name="simconf.mail.bufferSize" description="错误日志邮件缓冲区大小(单位:k)" defaultValue="50"/>
+
+        <!-- log4j2 -->
+        <property name="simconf.log4j2.home" description="log4j2日志的文件主目录" defaultValue="/Users/kyg/logs/simconf"/>
+
+        <property name="simconf.slow.method.time" description="慢方法时间(秒)" defaultValue="5"/>
+        <property name="simconf.cache.open" description="是否开启缓存,Y:开启,N:不开启" defaultValue="Y"/>
+    </group>
+
+    <script>
+        <generate template="app.properties" charset="UTF-8"/>
+        <generate template="applicationContext-datasource.xml" charset="UTF-8"/>
+        <generate template="applicationContext-redis.xml" charset="UTF-8"/>
+        <generate template="log4j2.xml"/>
+    </script>
+</config>
