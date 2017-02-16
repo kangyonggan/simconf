@@ -24,10 +24,6 @@ $(function () {
             name: {
                 required: true,
                 maxlength: 64
-            },
-            pushUrl: {
-                required: false,
-                maxlength: 256
             }
         },
         submitHandler: function (form, event) {

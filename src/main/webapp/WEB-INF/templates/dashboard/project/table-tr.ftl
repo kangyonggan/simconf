@@ -4,7 +4,6 @@
     <td>${project.code}</td>
     <td>${project.name}</td>
     <td>${project.createUsername}</td>
-    <td>${project.pushUrl}</td>
     <td><#include "delete.ftl"></td>
     <td><@c.relative_date datetime=project.createdTime/></td>
     <td>

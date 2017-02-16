@@ -28,16 +28,6 @@
             </div>
         </div>
     </div>
-    <div class="row">
-        <div class="row form-group">
-            <div class="col-md-3 control-label">
-                <label>推送地址</label>
-            </div>
-            <div class="col-md-7 controls">
-                <@spring.formInput "project.pushUrl" 'class="form-control" placeholder="请输入推送地址"'/>
-            </div>
-        </div>
-    </div>
 </form>
 </@override>
 

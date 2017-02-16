@@ -26,12 +26,6 @@ public class Project implements Serializable {
     private String name;
 
     /**
-     * 推送地址
-     */
-    @Column(name = "push_url")
-    private String pushUrl;
-
-    /**
      * 项目负责人
      */
     @Column(name = "create_username")

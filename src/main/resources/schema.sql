@@ -153,8 +153,6 @@ CREATE TABLE project
   COMMENT '项目代码',
   name            VARCHAR(64)                           NOT NULL
   COMMENT '项目名称',
-  push_url        VARCHAR(256)                          NOT NULL                DEFAULT ''
-  COMMENT '推送地址',
   create_username VARCHAR(20)                           NOT NULL
   COMMENT '项目负责人',
   is_deleted      TINYINT                               NOT NULL                DEFAULT 0
