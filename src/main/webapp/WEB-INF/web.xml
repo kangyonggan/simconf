@@ -68,6 +68,15 @@
         <url-pattern>/</url-pattern>
     </servlet-mapping>
 
+    <context-param>
+        <param-name>socketPort</param-name>
+        <param-value>17777</param-value>
+    </context-param>
+    <listener>
+        <description>Socket</description>
+        <listener-class>com.kangyonggan.app.simconf.server.SimConfServer</listener-class>
+    </listener>
+
     <error-page>
         <error-code>404</error-code>
         <location>/error/404</location>
