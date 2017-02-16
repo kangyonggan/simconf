@@ -5,6 +5,7 @@
     <td><#include "env.ftl"/></td>
     <td>${conf.name}</td>
     <td>${conf.value}</td>
+    <td width="20%">${conf.description}</td>
     <td><#include "delete.ftl"></td>
     <td><@c.relative_date datetime=conf.createdTime/></td>
     <td>

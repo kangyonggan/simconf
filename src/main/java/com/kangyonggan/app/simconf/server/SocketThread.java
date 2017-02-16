@@ -74,16 +74,18 @@ public class SocketThread extends Thread {
                     List<Conf> confs = confService.findConfsByProjCodeAndEnv((String) dataMap.get("projCode"), (String) dataMap.get("env"));
                     String data = JSON.toJSONString(confs);
                     push(data);
+                    SocketMap.put(dataMap.get("projCode") + "|" + dataMap.get("env"), this);
                 } else {
-//                    push("{"erro"}");验签失败
+                    push("验签失败");
                 }
             }
         } catch (IOException e) {
-            e.printStackTrace();
+            log.warn("客户端可能断开了链接", e);
+            SocketMap.remove(dataMap.get("projCode") + "|" + dataMap.get("env"));
         } catch (ConfigException e) {
-            e.printStackTrace();
+            log.warn(e.getMessage(), e);
         } catch (ParseException e) {
-            e.printStackTrace();
+            log.warn(e.getMessage(), e);
         }
     }
 
@@ -183,7 +185,7 @@ public class SocketThread extends Thread {
      *
      * @param data
      */
-    public void push(String data) {
+    public boolean push(String data) {
         try {
             log.info("响应报文:{}", data);
 
@@ -209,8 +211,10 @@ public class SocketThread extends Thread {
             out.write(bytes);
             out.flush();
             log.info("推送配置完成！");
+            return true;
         } catch (Exception e) {
             log.error("推送配置失败", e);
+            return false;
         }
     }
 }

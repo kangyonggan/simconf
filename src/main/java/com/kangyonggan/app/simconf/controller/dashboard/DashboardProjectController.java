@@ -1,8 +1,14 @@
 package com.kangyonggan.app.simconf.controller.dashboard;
 
+import com.alibaba.fastjson.JSON;
 import com.github.pagehelper.PageInfo;
+import com.kangyonggan.app.simconf.constants.Env;
 import com.kangyonggan.app.simconf.controller.BaseController;
+import com.kangyonggan.app.simconf.model.Conf;
 import com.kangyonggan.app.simconf.model.Project;
+import com.kangyonggan.app.simconf.server.SocketMap;
+import com.kangyonggan.app.simconf.server.SocketThread;
+import com.kangyonggan.app.simconf.service.ConfService;
 import com.kangyonggan.app.simconf.service.ProjectService;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,6 +21,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 
 /**
  * @author kangyonggan
@@ -26,6 +33,9 @@ public class DashboardProjectController extends BaseController {
 
     @Autowired
     private ProjectService projectService;
+
+    @Autowired
+    private ConfService confService;
 
     /**
      * 项目配置列表
@@ -150,6 +160,49 @@ public class DashboardProjectController extends BaseController {
         return getResultMap();
     }
 
+    /**
+     * 推送界面
+     *
+     * @param id
+     * @param model
+     * @return
+     */
+    @RequestMapping(value = "{id:[\\d]+}/push", method = RequestMethod.GET)
+    @RequiresPermissions("PROJECT")
+    public String push(@PathVariable("id") Long id, Model model) {
+        model.addAttribute("project", projectService.findProjectById(id));
+        model.addAttribute("envs", Env.values());
+        return getPathRoot() + "/push-modal";
+    }
 
+    /**
+     * 推送配置
+     *
+     * @param id
+     * @param env
+     * @param model
+     * @return
+     */
+    @RequestMapping(value = "{id:[\\d]+}/push", method = RequestMethod.POST)
+    @RequiresPermissions("PROJECT")
+    @ResponseBody
+    public Map<String, Object> push(@PathVariable("id") Long id, @RequestParam("env") String env, Model model) {
+        Map<String, Object> resultMap = getResultMap();
+
+        Project project = projectService.findProjectById(id);
+        List<Conf> confs = confService.findConfsByProjCodeAndEnv(project.getCode(), env);
+
+        SocketThread socketThread = SocketMap.get(project.getCode() + "|" + env);
+        if (socketThread == null) {
+            setResultMapFailure(resultMap, "此项目没有连接服务器！");
+            return resultMap;
+        }
+
+        boolean result = socketThread.push(JSON.toJSONString(confs));
+        if (!result) {
+            setResultMapFailure(resultMap, "推送失败！");
+        }
+        return resultMap;
+    }
 
 }

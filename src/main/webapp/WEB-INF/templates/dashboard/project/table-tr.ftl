@@ -26,11 +26,10 @@
                        data-url="${ctx}/dashboard/project/${project.id}/remove">物理删除</a>
                 </li>
             </#if>
-            <#if project.pushUrl!=''>
                 <li>
-                    <a href="${ctx}/dashboard/project/${project.id}/push">推送配置</a>
+                    <a href="${ctx}/dashboard/project/${project.id}/push" data-toggle="modal" data-target="#myModal"
+                       data-backdrop="static">推送配置</a>
                 </li>
-            </#if>
             </ul>
         </div>
     </td>
