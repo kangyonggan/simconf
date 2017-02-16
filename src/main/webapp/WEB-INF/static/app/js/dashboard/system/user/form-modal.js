@@ -32,39 +32,6 @@ $(function () {
             fullname: {
                 required: true,
                 isFullname: true
-            },
-            mobile: {
-                required: false,
-                isMobile: true,
-                remote: {
-                    url: "/validate/mobile",
-                    type: 'post',
-                    data: {
-                        'mobile': function () {
-                            return $('#mobile').val()
-                        },
-                        'oldMobile': function () {
-                            return $('#old-mobile').val()
-                        }
-                    }
-                }
-            },
-            email: {
-                required: false,
-                email: true,
-                remote: {
-                    url: "/validate/email2",
-                    type: 'post',
-                    data: {
-                        'email': function () {
-                            return $('#email').val()
-                        },
-                        'oldEmail': function () {
-                            return $('#old-email').val()
-                        }
-                    }
-                },
-                maxlength: 64
             }
         },
         submitHandler: function (form, event) {

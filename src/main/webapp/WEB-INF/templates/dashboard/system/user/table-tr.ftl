@@ -3,8 +3,6 @@
 <tr id="user-${user.id}">
     <td>${user.username}</td>
     <td>${user.fullname}</td>
-    <td>${user.mobile}</td>
-    <td>${user.email}</td>
     <td><#include "delete.ftl"></td>
     <td><@c.relative_date datetime=user.createdTime/></td>
     <td>
