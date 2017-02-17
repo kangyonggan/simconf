@@ -13,6 +13,7 @@ import lombok.extern.log4j.Log4j2;
 import org.apache.commons.lang3.ArrayUtils;
 import org.apache.commons.lang3.StringUtils;
 
+import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
@@ -140,7 +141,7 @@ public class SocketThread extends Thread {
      */
     private void initConfig() throws ConfigException {
         try {
-            Config config = new Config(dataMap.get("projCode") + "-" + dataMap.get("env"));
+            Config config = new Config(dataMap.get("projCode") + File.separator + dataMap.get("env"));
             privateKey = SecretUtil.getPrivateKey(config.getPrivateKeyPath());
             publicKey = SecretUtil.getPublicKey(config.getPublicKeyPath());
         } catch (Exception e) {

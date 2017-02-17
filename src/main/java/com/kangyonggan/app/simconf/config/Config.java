@@ -24,7 +24,7 @@ public class Config {
      * @throws ConfigException
      */
     public Config(String resourcePath) throws ConfigException {
-        loadProperties(PropertiesUtil.getProperties("config.root.path") + resourcePath + File.separator + resourcePath + ".properties");
+        loadProperties(PropertiesUtil.getProperties("config.root.path") + resourcePath + "/config.properties");
     }
 
     /**
