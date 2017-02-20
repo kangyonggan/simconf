@@ -32,7 +32,6 @@
         <!-- log4j2 -->
         <property name="simconf.log4j2.home" description="log4j2日志的文件主目录" defaultValue="/Users/kyg/logs/simconf"/>
         <property name="simconf.config.root.path" description="配置文件的根目录" defaultValue="/Users/kyg/data/config/"/>
-        <property name="simconf.server.port" description="服务器端口" defaultValue="17777"/>
 
         <property name="simconf.slow.method.time" description="慢方法时间(秒)" defaultValue="5"/>
         <property name="simconf.cache.open" description="是否开启缓存,Y:开启,N:不开启" defaultValue="Y"/>
