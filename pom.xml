@@ -107,6 +107,9 @@
                 <groupId>com.alibaba.citrus.tool</groupId>
                 <artifactId>autoconfig-maven-plugin</artifactId>
                 <version>${plugin.autoconfig.version}</version>
+                <configuration>
+                    <userProperties>${antx.path}</userProperties>
+                </configuration>
                 <executions>
                     <execution>
                         <id>compile</id>
